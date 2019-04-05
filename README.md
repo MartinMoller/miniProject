@@ -1,2 +1,2 @@
 # miniProject
-## Javascript project 4th semester.
+## 4th semester project made in React
