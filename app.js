@@ -1,4 +1,4 @@
-var connect = require("./dbConnect");
+var connect = require("./dbConnect").connect;
 connect(require("./settings").DEV_DB_URI);
 
 var createError = require('http-errors');
