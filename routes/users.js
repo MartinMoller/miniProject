@@ -26,8 +26,8 @@ router.post("/login", async (req, res, next) => {
       friends: users.map((el) => {
         user = {
           "username": el.user.firstName,
-          "latitude": el.loc.coordinates[0],
-          "longitude": el.loc.coordinates[1]
+          "longitude": el.loc.coordinates[0],
+          "latitude": el.loc.coordinates[1]
         }
         return user;
       })
