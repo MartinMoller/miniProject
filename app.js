@@ -1,5 +1,6 @@
 var connect = require("./dbConnect").connect;
 connect(require("./settings").DEV_DB_URI);
+const cors = require('cors');
 
 const graphqlHTTP = require('express-graphql');
 const { schema } = require('./schema');
@@ -20,6 +21,9 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+//cors handling
+app.use(cors());
 //Use graphQL and set settings
 app.use('/graphql', graphqlHTTP({
   schema: schema,
