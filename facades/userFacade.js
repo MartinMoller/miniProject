@@ -11,7 +11,7 @@ function positionCreator(lon, lat, userId, dateInFuture) {
 
 async function addUser(user) {
     try {
-        await User.create(user);
+        return await User.create(user);
     }
     catch (err) {
         console.log("Der skete en fejl: " + err);

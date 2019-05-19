@@ -8,6 +8,7 @@
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "dependencies": {
+    "apollo-server": "^2.5.0",
     "chai": "^4.2.0",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
