@@ -1,8 +1,10 @@
 var connect = require("./dbConnect").connect;
 connect(require("./settings").DEV_DB_URI);
+const cors = require('cors');
 
-const graphql = require('express-graphql');
-const schema = require('./schema');
+const graphqlHTTP = require('express-graphql');
+const { schema } = require('./schema');
+const { root } = require('./schema');
 
 var createError = require('http-errors');
 var express = require('express');
@@ -19,13 +21,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//Set graphQL root:
-const root = {
-  hello: () => "Ey whatup"
-}
 
+//cors handling
+app.use(cors());
 //Use graphQL and set settings
-app.use('/graphql', graphql({
+app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql: true
