@@ -26,6 +26,10 @@ async function deleteAll() {
     await User.deleteMany({});
 }
 
+async function deleteUser(user) {
+    await User.deleteOne({ _id: user._id });
+}
+
 async function findByUserName(username) {
     return await User.findOne({ userName: username });
 }
@@ -66,13 +70,21 @@ async function findNearbyUsers(lon, lat, dist) {
         }
     }, {}).populate("user")
 }
-
+async function updateUserFirstName(id, firstName) {
+    await User.findByIdAndUpdate(id, {
+        $set: {
+            firstName: firstName
+        }
+    })
+}
 module.exports = {
     addUser,
     getAllUsers,
     findByUserName,
     deleteAll,
     login,
-    findNearbyUsers
+    findNearbyUsers,
+    deleteUser, 
+    updateUserFirstName
 
 }
