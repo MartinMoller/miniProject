@@ -102,10 +102,12 @@ const resolvers = {
     }
 };
 
+/* Used if you do not use apollo
 const getAllUsers = async () => {return await userFacade.getAllUsers();};
 const getUserByUserName = async (args) => {return await userFacade.findByUserName(args.userName);};
 const findNearbyUsers = async (args) => {return await userFacade.findNearbyUsers(args.lon, args.lat, args.dist);};
 const addNewUser = async (args) => {let user = { firstName: args.user.firstName, lastName: args.user.lastName, email: args.user.email, userName: args.user.userName, password: args.user.password }; return await userFacade.addUser(user);};
+
 
 const root = {
     getAllUsers,
@@ -113,6 +115,7 @@ const root = {
     findNearbyUsers,
     addNewUser
 };
+*/
 
 const server = new ApolloServer({
     typeDefs,
