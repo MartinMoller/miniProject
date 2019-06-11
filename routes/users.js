@@ -15,6 +15,7 @@ router.post('/add', async function (req, res, next) {
 });
 
 router.post("/login", async (req, res, next) => {
+  console.log(req.body)
   user = await userFacade.login(req.body);
   await console.log(user)
   if (user == null) {

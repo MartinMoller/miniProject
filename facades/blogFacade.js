@@ -1,17 +1,21 @@
 var LocationBlog = require("../models/LocationBlog.js");
 
 
-function addLocationBlog(blog) {
-    LocationBlog.create(blog);
+async function addLocationBlog(blog) {
+    return await LocationBlog.create(blog);
 }
 
-function likeLocationBlog(user, blog) {
-    LocationBlog.update(
-        { _id: blog._id },
-        { $push: { likedBy: user._id } })
+async function likeLocationBlog(user, blog) {
+    return await LocationBlog.findByIdAndUpdate(blog._id,
+        { $push: { likedBy: user._id } }).populate("likedBy").populate("author");
+}
+
+async function findById(blogId) {
+    return await LocationBlog.findOne({ _id: blogId }).populate("likedBy").populate("author");
 }
 
 module.exports = {
     addLocationBlog,
-    likeLocationBlog
+    likeLocationBlog,
+    findById
 }

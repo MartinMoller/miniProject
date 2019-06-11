@@ -43,7 +43,14 @@ async function login(body) {
         else {
             Position.findOneAndUpdate(
                 { user: u._id },
-                { $set: { loc: { type: "Point", coordinates: [body.longitude, body.latitude] }, created: Date.now() } },
+                {
+                    $set:
+                    {
+                        loc:
+                            { type: "Point", coordinates: [body.longitude, body.latitude] },
+                        created: Date.now()
+                    }
+                },
                 { upsert: true, new: true }, function (err, pos) {
                     if (err) {
                         throw new Error(err);
@@ -84,7 +91,7 @@ module.exports = {
     deleteAll,
     login,
     findNearbyUsers,
-    deleteUser, 
+    deleteUser,
     updateUserFirstName
 
 }

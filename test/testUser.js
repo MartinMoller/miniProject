@@ -58,6 +58,32 @@ describe("Test user facade", function () {
         expect(userFromDb.userName).to.equal(user1.userName);
     })
 
+    it("Deletes user", async function () {
+        var user1 = {
+            firstName: "Allan", lastName: "Andersen", userName: "admin1", password: "1234", email: "a1@a.dk",
+            job: [{ type: "t1", company: "c1", companyUrl: "url" }, { type: "t1", company: "c1", companyUrl: "url" }]
+        }
+        await userFacade.addUser(user1);
+        let userFromDb = await userFacade.findByUserName("admin1");
+        expect(userFromDb.userName).to.equal(user1.userName);
+        await userFacade.deleteUser(userFromDb);
+        userFromDb = await userFacade.findByUserName("admin1");
+        expect(userFromDb).to.equal(null);
+    })
+
+    it("Updates users firstname", async function () {
+        var user1 = {
+            firstName: "Allan", lastName: "Andersen", userName: "admin1", password: "1234", email: "a1@a.dk",
+            job: [{ type: "t1", company: "c1", companyUrl: "url" }, { type: "t1", company: "c1", companyUrl: "url" }]
+        }
+        await userFacade.addUser(user1);
+        let userFromDb = await userFacade.findByUserName("admin1");
+        expect(userFromDb.userName).to.equal(user1.userName);
+        await userFacade.updateUserFirstName(userFromDb._id, "MARTIN");
+        userFromDb = await userFacade.findByUserName("admin1");
+        expect(userFromDb.firstName).to.equal("MARTIN");
+    })
+
     after(function () {
         disconnect();
 
